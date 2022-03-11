@@ -14,18 +14,15 @@ public class DnaValidator {
 	public boolean isMutant(String[] dna2) {
 		try {
 			//verifica los arreglos de forma vertical
-			boolean validaVertical = validarVertical(dna2);
-	        if (validaVertical) {
+	        if (validarVertical(dna2)) {
 	        	return true;
 	        }
 	        //verifica los arreglos de forma horizontal
-	        boolean validaHorizontal = validarHorizontal(dna2);
-	        if (validaHorizontal) {
+	        if (validarHorizontal(dna2)) {
 	        	return true;
 	        }
 	        //verifica los arreglos de forma diagonal
-	        boolean validaDiagonal = validarDiagonal(dna2);
-	        if (validaDiagonal) {
+	        if (validarDiagonal(dna2)) {
 	        	return true;
 	        }
 		} catch (Exception e) {
