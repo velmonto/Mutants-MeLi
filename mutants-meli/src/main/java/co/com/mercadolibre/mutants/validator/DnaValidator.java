@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class DnaValidator {
 	
-	public static boolean isMutant(String[] dna2) {
+	public boolean isMutant(String[] dna2) {
 		try {
 			//verifica hallazgo vertical
 			boolean validaVertical = validarVertical(dna2);
