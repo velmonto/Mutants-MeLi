@@ -1,6 +1,6 @@
 package co.com.mercadolibre.mutants.restclient;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +17,7 @@ public class DnaRepositoryClient {
 	@Value("${persistence.url:http://localhost:8002/mutants/persistence/v1}")
 	private String url;
 	
-	public void saveDna(@RequestBody ArrayList<String> dna){
+	public void saveDna(@RequestBody List<String> dna){
 		restTemplate.postForObject(url, dna, Boolean.class);
 	}
 

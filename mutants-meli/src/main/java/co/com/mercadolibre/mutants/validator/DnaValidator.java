@@ -8,23 +8,33 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class DnaValidator {
 	
+	public static final String ERRORLOG = "Error: {}";
+	
+	
 	public boolean isMutant(String[] dna2) {
 		try {
-			//verifica hallazgo vertical
+			//verifica los arreglos de forma vertical
 			boolean validaVertical = validarVertical(dna2);
-	        if (validaVertical) return true;
-	        //verifica hallazgo horizontal
+	        if (validaVertical) {
+	        	return true;
+	        }
+	        //verifica los arreglos de forma horizontal
 	        boolean validaHorizontal = validarHorizontal(dna2);
-	        if (validaHorizontal) return true;
-	        //verifica hallazgo oblicuo
+	        if (validaHorizontal) {
+	        	return true;
+	        }
+	        //verifica los arreglos de forma diagonal
 	        boolean validaDiagonal = validarDiagonal(dna2);
-	        if (validaDiagonal)return true;
+	        if (validaDiagonal) {
+	        	return true;
+	        }
 		} catch (Exception e) {
-			log.error("Error: {}", e.getMessage(), e);
+			log.error(ERRORLOG, e.getMessage(), e);
 		}
 		return false;
 	}
-
+	
+	
 	private static boolean validarDiagonal(String[] dna) {
 		String[][] matriz = crearMatriz(dna);
 	    int contador = 1;
@@ -32,19 +42,23 @@ public class DnaValidator {
 
 		    for (int i = 0; i < dna.length; i++) {
 		        for (int j = 0; j < dna.length; j++) {
-		            if (j == 0) continue;
-		            if (i == 0) continue;
+		            if (j == 0 && i == 0) {
+		            	continue;
+		            }
 		            //compara con la posicion superior izquierda
-		            if (matriz[i - 1][j - 1] == matriz[i][j]) contador++; else contador = 1;
-		            //compara con la posicion superior derecha
-		            //if (matrix[i + 1][j + 1] == matrix[i][j])letterCounter++; else letterCounter = 1;
+		            if (matriz[i - 1][j - 1].equals(matriz[i][j])) {
+		            	contador++; 
+		            }else {
+		            	contador = 1;
+		            }
 		            //finaliza como verdadero si hay 4 letras iguales consecutivas
-		            if (contador == 4) return true;
-
+		            if (contador == 4) {
+		            	return true;
+		            }
 		        }
 		    }
 		} catch (Exception e) {
-			log.error("Error: {}", e.getMessage(), e);
+			log.error(ERRORLOG, e.getMessage(), e);
 		}
 		return false;
 	}
@@ -56,20 +70,24 @@ public class DnaValidator {
 			for (int i = 0; i < matriz.length; i++) {
 				for (int j = 0; j < matriz.length; j++) {
 					// compara consecutivas desde la segunda posición
-					if (j == 0)
+					if (j == 0) {
 						continue;
+					}
 					// resetea contado si la letra de arriba no es igual a la de abajo
-					if (matriz[j][i] == matriz[j - 1][i])
+					if (matriz[j][i].equals(matriz[j - 1][i])) {
 						contador++;
-					else
+					}else {
 						contador = 1;
+					}
 					// finaliza como verdadero si hay 4 letras iguales consecutivas
-					if (contador == 4)
+					if (contador == 4) {
 						return true;
+					}
+						
 				}
 			}
 		} catch (Exception e) {
-			log.error("Error: {}", e.getMessage(), e);
+			log.error(ERRORLOG, e.getMessage(), e);
 		}
 		return false;
 	}
@@ -83,21 +101,24 @@ public class DnaValidator {
 				char[] dnaChars = cadena.toCharArray();
 				for (int i = 0; i < dnaChars.length; i++) {
 					// compara consecutivas desde la segunda posición
-					if (i == 0)
+					if (i == 0) {
 						continue;
+					}
 					// resetea contado si la letra de la derecha no es igual a la de la izquierda
-					if (dnaChars[i] == dnaChars[i - 1])
+					if (dnaChars[i] == dnaChars[i - 1]) {
 						contador++;
-					else
+					}else {
 						contador = 1;
+					}
 					// finaliza como verdadero si hay 4 letras iguales consecutivas
-					if (contador == 4)
+					if (contador == 4) {
 						return true;
+					}
 				}
 			}
 	        
 		} catch (Exception e) {
-			log.error("Error: {}", e.getMessage(), e);
+			log.error(ERRORLOG, e.getMessage(), e);
 		}
 		return false;
 	}
@@ -115,7 +136,7 @@ public class DnaValidator {
 				}
 			}
 		} catch (Exception e) {
-			log.error("Error: {}", e.getMessage(), e);
+			log.error(ERRORLOG, e.getMessage(), e);
 		}
 		return matriz;
 	}
