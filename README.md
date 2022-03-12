@@ -33,11 +33,11 @@ El servivio retornará un estado 200 o 403 según el caso
 
 ## _Coverage_
 <p align="center"> 
-  <img src="coverage.PNG">
+  <img src="Coverage.png">
 </p>
 
 
 ## _Sonar_
 <p align="center"> 
-  <img src="Sonar.png">
+  <img src="Informe Sonar.png">
 </p>
